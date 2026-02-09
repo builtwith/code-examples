@@ -4,14 +4,15 @@ Look up the full technology stack, metadata, and history for any domain. Include
 
 ## Prerequisites
 
-- **Node.js** v14 or later
 - A **BuiltWith API key** — get one at [https://api.builtwith.com](https://api.builtwith.com)
+- **Node.js** v14+ or **Python** 3.8+
 
-## Setup
+## Setup — Node.js
 
 1. Install dependencies:
 
    ```bash
+   cd nodejs
    npm install
    ```
 
@@ -28,31 +29,55 @@ Look up the full technology stack, metadata, and history for any domain. Include
    LOOKUP=builtwith.com
    ```
 
-## Usage
+4. Run:
 
-### Single domain lookup
+   ```bash
+   npm start
+   ```
 
-```bash
-npm start
-```
-
-Returns the complete technology profile for the specified domain including current and historical technologies.
-
-### Bulk domain lookup
+### Bulk domain lookup (Node.js)
 
 ```bash
 npm run bulk
 ```
 
-Submits a list of domains in a single POST request. Small batches return results immediately; large batches return a job ID for background processing — the script polls automatically until results are ready, then downloads them.
+## Setup — Python
 
-**Note:** Bulk results are a one-time download and are deleted after first access.
+1. Install dependencies:
+
+   ```bash
+   cd python
+   pip install -r requirements.txt
+   ```
+
+2. Copy the example environment file and fill in your key:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Edit `.env` with your values:
+
+   ```
+   BUILTWITH_API_KEY=your-api-key-here
+   LOOKUP=builtwith.com
+   ```
+
+4. Run:
+
+   ```bash
+   python main.py
+   ```
+
+### Bulk domain lookup (Python)
+
+```bash
+python bulk.py
+```
 
 ## Configuration
 
-Set these in your `.env` file:
-
-### Single lookup (`index.js`)
+### Single lookup
 
 | Variable | Description |
 |---|---|
@@ -63,7 +88,7 @@ Set these in your `.env` file:
 | `NOMETA` | Set to `true` to exclude meta data |
 | `NOATTR` | Set to `true` to exclude technology attributes |
 
-### Bulk lookup (`bulk.js`)
+### Bulk lookup
 
 | Variable | Description |
 |---|---|

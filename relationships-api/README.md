@@ -4,14 +4,15 @@ Discover connections and relationships between websites.
 
 ## Prerequisites
 
-- **Node.js** v14 or later
 - A **BuiltWith API key** — get one at [https://api.builtwith.com](https://api.builtwith.com)
+- **Node.js** v14+ or **Python** 3.8+
 
-## Setup
+## Setup — Node.js
 
 1. Install dependencies:
 
    ```bash
+   cd nodejs
    npm install
    ```
 
@@ -28,13 +29,39 @@ Discover connections and relationships between websites.
    LOOKUP=builtwith.com
    ```
 
-## Usage
+4. Run:
 
-```bash
-npm start
-```
+   ```bash
+   npm start
+   ```
 
-Returns websites that are connected to the specified domain through shared technologies, analytics IDs, and other relationships.
+## Setup — Python
+
+1. Install dependencies:
+
+   ```bash
+   cd python
+   pip install -r requirements.txt
+   ```
+
+2. Copy the example environment file and fill in your key:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Edit `.env` with your values:
+
+   ```
+   BUILTWITH_API_KEY=your-api-key-here
+   LOOKUP=builtwith.com
+   ```
+
+4. Run:
+
+   ```bash
+   python main.py
+   ```
 
 ## Configuration
 

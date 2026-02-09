@@ -4,14 +4,15 @@ Find websites selling specific products.
 
 ## Prerequisites
 
-- **Node.js** v14 or later
 - A **BuiltWith API key** — get one at [https://api.builtwith.com](https://api.builtwith.com)
+- **Node.js** v14+ or **Python** 3.8+
 
-## Setup
+## Setup — Node.js
 
 1. Install dependencies:
 
    ```bash
+   cd nodejs
    npm install
    ```
 
@@ -28,13 +29,39 @@ Find websites selling specific products.
    QUERY=headphones
    ```
 
-## Usage
+4. Run:
 
-```bash
-npm start
-```
+   ```bash
+   npm start
+   ```
 
-Returns websites that sell products matching the search query.
+## Setup — Python
+
+1. Install dependencies:
+
+   ```bash
+   cd python
+   pip install -r requirements.txt
+   ```
+
+2. Copy the example environment file and fill in your key:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Edit `.env` with your values:
+
+   ```
+   BUILTWITH_API_KEY=your-api-key-here
+   QUERY=headphones
+   ```
+
+4. Run:
+
+   ```bash
+   python main.py
+   ```
 
 ## Configuration
 

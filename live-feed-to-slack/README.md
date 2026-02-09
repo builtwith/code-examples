@@ -4,15 +4,16 @@ Stream newly detected domains from the [BuiltWith Live Feed](https://api.builtwi
 
 ## Prerequisites
 
-- **Node.js** v14 or later
 - A **BuiltWith API key** — get one at [https://api.builtwith.com](https://api.builtwith.com)
 - A **Slack Incoming Webhook URL** — create one at [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks)
+- **Node.js** v14+ or **Python** 3.8+
 
-## Setup
+## Setup — Node.js
 
 1. Install dependencies:
 
    ```bash
+   cd nodejs
    npm install
    ```
 
@@ -30,17 +31,42 @@ Stream newly detected domains from the [BuiltWith Live Feed](https://api.builtwi
    BUILTWITH_CHANNELS=new,Shopify
    ```
 
-## Usage
+4. Run:
 
-```bash
-npm start
-```
+   ```bash
+   npm start
+   ```
 
-The script connects to the BuiltWith Live Feed WebSocket, subscribes to your configured channels, and posts each new domain detection to Slack.
+## Setup — Python
+
+1. Install dependencies:
+
+   ```bash
+   cd python
+   pip install -r requirements.txt
+   ```
+
+2. Copy the example environment file and fill in your keys:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Edit `.env` with your values:
+
+   ```
+   BUILTWITH_API_KEY=your-api-key-here
+   SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...
+   BUILTWITH_CHANNELS=new,Shopify
+   ```
+
+4. Run:
+
+   ```bash
+   python main.py
+   ```
 
 ## Configuration
-
-Set these in your `.env` file:
 
 | Variable | Description |
 |---|---|
@@ -61,8 +87,13 @@ Set these in your `.env` file:
 
 ```
 live-feed-to-slack/
-  config.js      - Loads and validates environment variables
-  websocket.js   - WebSocket connection with auto-reconnect
-  slack.js       - Slack webhook posting and message formatting
-  index.js       - Entry point that wires everything together
+  nodejs/
+    config.js      - Loads and validates environment variables
+    websocket.js   - WebSocket connection with auto-reconnect
+    slack.js       - Slack webhook posting and message formatting
+    index.js       - Entry point that wires everything together
+  python/
+    main.py        - Single-file implementation using websockets + requests
+  .env.example     - Shared environment template
+  README.md
 ```

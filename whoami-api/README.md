@@ -4,14 +4,15 @@ Verify your BuiltWith API credentials and check account status.
 
 ## Prerequisites
 
-- **Node.js** v14 or later
 - A **BuiltWith API key** — get one at [https://api.builtwith.com](https://api.builtwith.com)
+- **Node.js** v14+ or **Python** 3.8+
 
-## Setup
+## Setup — Node.js
 
 1. Install dependencies:
 
    ```bash
+   cd nodejs
    npm install
    ```
 
@@ -27,16 +28,47 @@ Verify your BuiltWith API credentials and check account status.
    BUILTWITH_API_KEY=your-api-key-here
    ```
 
-## Usage
+4. Run:
 
-```bash
-npm start
-```
+   ```bash
+   npm start
+   ```
 
-Returns your account information including plan details and API access level.
+## Setup — Python
+
+1. Install dependencies:
+
+   ```bash
+   cd python
+   pip install -r requirements.txt
+   ```
+
+2. Copy the example environment file and fill in your key:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Edit `.env` with your values:
+
+   ```
+   BUILTWITH_API_KEY=your-api-key-here
+   ```
+
+4. Run:
+
+   ```bash
+   python main.py
+   ```
+
+## Configuration
+
+| Variable | Description |
+|---|---|
+| `BUILTWITH_API_KEY` | Your BuiltWith API key |
 
 ## API Reference
 
 - **Endpoint**: `https://api.builtwith.com/whoamiv1/api.json`
 - **Method**: GET
-- **Parameters**: `KEY` — your API key
+- **Parameters**: `KEY`
