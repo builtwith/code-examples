@@ -1,0 +1,100 @@
+# BuiltWith Domain API
+
+Look up the full technology stack, metadata, and history for any domain. Includes a bulk lookup script for multiple domains.
+
+## Prerequisites
+
+- **Node.js** v14 or later
+- A **BuiltWith API key** — get one at [https://api.builtwith.com](https://api.builtwith.com)
+
+## Setup
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Copy the example environment file and fill in your key:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Edit `.env` with your values:
+
+   ```
+   BUILTWITH_API_KEY=your-api-key-here
+   LOOKUP=builtwith.com
+   ```
+
+## Usage
+
+### Single domain lookup
+
+```bash
+npm start
+```
+
+Returns the complete technology profile for the specified domain including current and historical technologies.
+
+### Bulk domain lookup
+
+```bash
+npm run bulk
+```
+
+Submits a list of domains in a single POST request. Small batches return results immediately; large batches return a job ID for background processing — the script polls automatically until results are ready, then downloads them.
+
+**Note:** Bulk results are a one-time download and are deleted after first access.
+
+## Configuration
+
+Set these in your `.env` file:
+
+### Single lookup (`index.js`)
+
+| Variable | Description |
+|---|---|
+| `BUILTWITH_API_KEY` | Your BuiltWith API key |
+| `LOOKUP` | Domain to look up (default: `builtwith.com`) |
+| `LIVEONLY` | Set to `true` to return only live/current technologies |
+| `NOPII` | Set to `true` to exclude personally identifiable information |
+| `NOMETA` | Set to `true` to exclude meta data |
+| `NOATTR` | Set to `true` to exclude technology attributes |
+
+### Bulk lookup (`bulk.js`)
+
+| Variable | Description |
+|---|---|
+| `BUILTWITH_API_KEY` | Your BuiltWith API key |
+| `BULK_DOMAINS` | Comma-separated list of domains (default: `builtwith.com,google.com`) |
+| `LIVEONLY` | Set to `true` to return only live/current technologies |
+| `NOPII` | Set to `true` to exclude personally identifiable information |
+| `NOMETA` | Set to `true` to exclude meta data |
+| `HIDETEXT` | Set to `true` to hide text content |
+| `HIDEDL` | Set to `true` to hide download links |
+| `POLL_INTERVAL` | Milliseconds between status checks for async jobs (default: `10000`) |
+
+## How bulk processing works
+
+1. **Submit** — POST a JSON list of domains with options
+2. **Small batches** — If the batch is within the sync limit, results come back immediately in the same response
+3. **Large batches** — The API returns a `job_id` with status `queued`. The script then:
+   - Polls `GET /v22/domain/bulk/{job_id}` until status is `complete`
+   - Downloads results from `GET /v22/domain/bulk/{job_id}/result`
+4. **Results are deleted after first access** — save the output if you need it
+
+## API Reference
+
+### Single lookup
+
+- **Endpoint**: `https://api.builtwith.com/v22/api.json`
+- **Method**: GET
+- **Parameters**: `KEY`, `LOOKUP`, `LIVEONLY`, `NOPII`, `NOMETA`, `NOATTR`, `FDRANGE`, `LDRANGE`
+
+### Bulk lookup
+
+- **Submit**: `POST https://api.builtwith.com/v22/domain/bulk?KEY=...`
+- **Check status**: `GET https://api.builtwith.com/v22/domain/bulk/{job_id}?KEY=...`
+- **Get results**: `GET https://api.builtwith.com/v22/domain/bulk/{job_id}/result?KEY=...`

@@ -1,0 +1,12 @@
+{
+  "name": "builtwith-company-to-url-api",
+  "version": "1.0.0",
+  "description": "Find domains associated with a company name using the BuiltWith Company to URL API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}

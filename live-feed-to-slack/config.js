@@ -7,13 +7,13 @@ const channels = (process.env.BUILTWITH_CHANNELS || 'new')
   .map((ch) => ch.trim())
   .filter(Boolean);
 
-if (!apiKey || apiKey === '00000000-0000-0000-0000-000000000000') {
+if (!apiKey || apiKey === 'your-api-key-here') {
   console.error('Error: Set a valid BUILTWITH_API_KEY in your .env file.');
   console.error('Get your API key at https://api.builtwith.com');
   process.exit(1);
 }
 
-if (!slackWebhookUrl || slackWebhookUrl.includes('T00000000')) {
+if (!slackWebhookUrl || slackWebhookUrl === 'your-slack-webhook-url-here') {
   console.error('Error: Set a valid SLACK_WEBHOOK_URL in your .env file.');
   console.error('Create a webhook at https://api.slack.com/messaging/webhooks');
   process.exit(1);

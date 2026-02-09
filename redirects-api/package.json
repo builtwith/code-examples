@@ -1,0 +1,12 @@
+{
+  "name": "builtwith-redirects-api",
+  "version": "1.0.0",
+  "description": "Track live and historical domain redirects using the BuiltWith Redirects API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}
